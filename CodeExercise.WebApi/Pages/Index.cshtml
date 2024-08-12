@@ -1,0 +1,89 @@
+﻿@page
+
+@{
+    ViewData["Title"] = "API Testing Harness";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5 mb-2">
+        <h1 class="mb-4">@ViewData["Title"]</h1>
+
+        <div class="mb-3">
+            <label for="httpMethod" class="form-label">HTTP Method</label>
+            <select class="form-select" id="httpMethod">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="targetUrl" class="form-label">Target URL</label>
+            <input type="text" class="form-control" id="targetUrl" value="/weatherforecast">
+        </div>
+
+        <div class="mb-3">
+            <label for="requestBody" class="form-label">Request Body (JSON)</label>
+            <textarea class="form-control" id="requestBody" rows="5"></textarea>
+        </div>
+
+        <button class="btn btn-primary" id="submitBtn">Submit</button>
+        <button class="btn btn-secondary ms-2" id="clearBtn">Clear Result</button>
+
+        <div class="mt-4">
+            <h4>Response:</h4>
+            <div id="responsePanel" class="border p-3 bg-light" style="min-height: 200px;"></div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#submitBtn').click(function () {
+                // Clear previous results
+                $('#responsePanel').empty();
+
+                // Get values from the UI
+                var method = $('#httpMethod').val();
+                var url = $('#targetUrl').val();
+                var body = $('#requestBody').val();
+
+                // Make the AJAX request
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data: body,
+                    contentType: "application/json",
+                    success: function (data, status, xhr) {
+                        $('#responsePanel').html('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+                    },
+                    error: function (xhr, status, error) {
+                        // Display the status code and the error message
+                        var errorMessage = '<strong>Status Code: ' + xhr.status + '</strong><br>' +
+                            '<strong>Status Text: ' + xhr.statusText + '</strong><br>' +
+                            '<strong>Error Message: </strong>' + xhr.responseText;
+                        $('#responsePanel').html('<pre>' + errorMessage + '</pre>');
+                    }
+                });
+            });
+
+            // Clear result panel on clear button click
+            $('#clearBtn').click(function () {
+                $('#responsePanel').empty();
+            });
+        });
+    </script>
+</body>
+</html>
