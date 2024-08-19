@@ -9,6 +9,9 @@ internal class Program
         Console.WriteLine("Hello, World!");
 
         var fizzBuzzEngine = new FizzBuzzEngine();
-        fizzBuzzEngine.Run();
+        for (int i = 0; i <= 100; i++)
+        {
+            Console.WriteLine(fizzBuzzEngine.GenerateOutput(i));
+        }
     }
 }

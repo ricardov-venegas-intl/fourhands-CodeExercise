@@ -1,20 +1,22 @@
 ﻿namespace CodeExercise.Core;
 
-public class FizzBuzzEngine
+public class FizzBuzzEngine : IOutputEngine
 {
-    public void Run(int limit = 100)
+    public string GenerateOutput(int number)
     {
-        for (int i = 1; i <= limit; i++)
+        string output = "";
+        if (number % 3 == 0)
         {
-            string output = "";
-            if (i % 3 == 0)
-            {
-                output += "Fizz";
-            }
-
-            // TODO: Finish the FizzBuzz implementation
-
-            Console.WriteLine("{0}: {1}", i, output);
+            output += "Fizz";
         }
+        if (number % 5 == 0)
+        {
+            output += "Buzz";
+        }
+        if (output.Length == 0)
+        {
+            output = number.ToString();
+        }
+        return output;
     }
 }
