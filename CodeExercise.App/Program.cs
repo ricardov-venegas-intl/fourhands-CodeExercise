@@ -11,7 +11,8 @@ internal class Program
         var fizzBuzzEngine = new FizzBuzzEngine();
         for (int i = 0; i <= 100; i++)
         {
-            Console.WriteLine(fizzBuzzEngine.GenerateOutput(i));
+            var kv = fizzBuzzEngine.GenerateOutput(i);
+            Console.WriteLine("{0} : {1}", kv.Key, kv.Value);
         }
     }
 }

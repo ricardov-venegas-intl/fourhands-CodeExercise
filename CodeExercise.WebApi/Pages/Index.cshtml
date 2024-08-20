@@ -23,7 +23,7 @@
             <label for="httpMethod" class="form-label">HTTP Method</label>
             <select class="form-select" id="httpMethod">
                 <option value="GET">GET</option>
-                <option value="POST">POST</option>
+                <option value="POST" selected>POST</option>
                 <option value="PUT">PUT</option>
                 <option value="DELETE">DELETE</option>
             </select>
@@ -36,7 +36,7 @@
 
         <div class="mb-3">
             <label for="requestBody" class="form-label">Request Body (JSON)</label>
-            <textarea class="form-control" id="requestBody" rows="5"></textarea>
+            <textarea class="form-control" id="requestBody" rows="5">{min=0, max=100}</textarea>
         </div>
 
         <button class="btn btn-primary" id="submitBtn">Submit</button>

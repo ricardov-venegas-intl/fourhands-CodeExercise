@@ -2,21 +2,37 @@
 
 public class FizzBuzzEngine : IOutputEngine
 {
-    public string GenerateOutput(int number)
+    FizzRule fizzRule = new FizzRule();
+
+    public KeyValuePair<int,string> GenerateOutput(int number)
     {
         string output = "";
-        if (number % 3 == 0)
+
+        if (number % 7 == 0)
         {
-            output += "Fizz";
+            output = "Bar";
         }
-        if (number % 5 == 0)
+        else
         {
-            output += "Buzz";
+            if (fizzRule.GenerateOutput(number, output, out output) == false)
+            {
+                return new KeyValuePair<int, string>(number, output);
+            }
+
+            if (number % 5 == 0)
+            {
+                output += "Buzz";
+            }
+            if (output.Length == 0)
+            {
+                output = number.ToString();
+            } 
         }
-        if (output.Length == 0)
+        if (number % 9 == 0)
         {
-            output = number.ToString();
+            output = output.ToUpper();
         }
-        return output;
+
+        return new KeyValuePair<int,string>(number, output);
     }
 }

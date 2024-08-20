@@ -2,6 +2,6 @@
 {
     public interface IOutputEngine
     {
-        string GenerateOutput(int number);
+        KeyValuePair<int,string> GenerateOutput(int number);
     }
 }

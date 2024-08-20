@@ -14,7 +14,7 @@
             builder.Services.AddRazorPages();  // For Razor Pages
 
             // Register the interface and implementation
-            // builder.Services.AddScoped<IMyService, MyService>();
+            builder.Services.AddScoped<IOutputEngine, FizzBuzzEngine>();
 
             var app = builder.Build();
 
